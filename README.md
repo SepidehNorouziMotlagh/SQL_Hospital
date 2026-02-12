@@ -68,6 +68,39 @@ Dim_Diagnosis & Dim_Treatment: Clinical details.
 
 Dim_PaymentMethod: Financial transaction types.
 
+erDiagram
+    Dim_Patient ||--o{ PatientVisits : "has"
+    Dim_Doctor ||--o{ PatientVisits : "attends"
+    Dim_Department ||--o{ PatientVisits : "handles"
+    Dim_Diagnosis ||--o{ PatientVisits : "diagnosed_in"
+    Dim_Treatment ||--o{ PatientVisits : "prescribed_in"
+    Dim_PaymentMethod ||--o{ PatientVisits : "pays_via"
+
+    Dim_Patient {
+        varchar PatientID PK
+        varchar FullName
+        varchar Gender
+        date DOB
+        varchar City
+        varchar State
+        varchar Country
+    }
+    Dim_Department {
+        varchar DepartmentID PK
+        varchar DepartmentName
+        varchar DepartmentCategory
+    }
+    PatientVisits {
+        varchar VisitID PK
+        varchar PatientID FK
+        varchar DoctorID FK
+        varchar DepartmentID FK
+        varchar DiagnosisID FK
+        varchar TreatmentID FK
+        decimal BillAmount
+        int SatisfactionScore
+    }
+
 🧠 Key SQL Concepts Demonstrated
 
 String Manipulation: LEFT, SUBSTRING, UPPER, LOWER, LTRIM/RTRIM.
@@ -117,8 +150,6 @@ Prerequisites: Microsoft SQL Server.
 Setup:
 
 Run the Data_Cleaning_Scripts.sql to create the clean tables and consolidate the visit data.
-
-Note: Raw insert scripts for historical years are excluded due to file size, but the logic remains reproducible.
 
 Analysis:
 
