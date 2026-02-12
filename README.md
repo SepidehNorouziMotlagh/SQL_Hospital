@@ -68,39 +68,6 @@ Dim_Diagnosis & Dim_Treatment: Clinical details.
 
 Dim_PaymentMethod: Financial transaction types.
 
-erDiagram
-    Dim_Patient ||--o{ PatientVisits : "has"
-    Dim_Doctor ||--o{ PatientVisits : "attends"
-    Dim_Department ||--o{ PatientVisits : "handles"
-    Dim_Diagnosis ||--o{ PatientVisits : "diagnosed_in"
-    Dim_Treatment ||--o{ PatientVisits : "prescribed_in"
-    Dim_PaymentMethod ||--o{ PatientVisits : "pays_via"
-
-    Dim_Patient {
-        varchar PatientID PK
-        varchar FullName
-        varchar Gender
-        date DOB
-        varchar City
-        varchar State
-        varchar Country
-    }
-    Dim_Department {
-        varchar DepartmentID PK
-        varchar DepartmentName
-        varchar DepartmentCategory
-    }
-    PatientVisits {
-        varchar VisitID PK
-        varchar PatientID FK
-        varchar DoctorID FK
-        varchar DepartmentID FK
-        varchar DiagnosisID FK
-        varchar TreatmentID FK
-        decimal BillAmount
-        int SatisfactionScore
-    }
-
 🧠 Key SQL Concepts Demonstrated
 
 String Manipulation: LEFT, SUBSTRING, UPPER, LOWER, LTRIM/RTRIM.
@@ -154,7 +121,3 @@ Run the Data_Cleaning_Scripts.sql to create the clean tables and consolidate the
 Analysis:
 
 Run the queries in Data_Exploration.sql to generate insights.
-
-Fill in your Name and Links at the bottom.
-
-Upload your SQL file (you can put both the cleaning and the questions in one file, or split them into two files as suggested in the "File Structure" section).
